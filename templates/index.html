@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.ico') }}">
+        <title>Seralog</title>
+    </static>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header-section">
+            <div class="logo-container">
+                <div class="smeraldo-flower">
+                    <div class="petal petal1"></div>
+                    <div class="petal petal2"></div>
+                    <div class="petal petal3"></div>
+                    <div class="petal petal4"></div>
+                    <div class="petal petal5"></div>
+                </div>
+                <span class="logo-text">Seralog</span>
+            </div>
+            <h1><i class="fas fa-shield-alt"></i> Seralog</h1>
+            <p class="mb-0">Advanced Security Log Analysis & Threat Detection</p>
+        </div>
+        <div class="container-fluid p-4">
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button">
+                        <i class="fas fa-upload"></i> Upload & Analyze
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tools-tab" data-bs-toggle="tab" data-bs-target="#tools" type="button">
+                        <i class="fas fa-tools"></i> Security Tools
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button">
+                        <i class="fas fa-chart-line"></i> Analysis Results
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="mainTabsContent">
+                <!-- Upload Tab -->
+                <div class="tab-pane fade show active" id="upload" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="upload-zone" id="uploadZone">
+                                <i class="fas fa-cloud-upload-alt fa-4x text-primary mb-3"></i>
+                                <h4>Drag & Drop Log Files Here</h4>
+                                <p class="text-muted">Or click to browse files (Max: 50MB)</p>
+                                <input type="file" id="fileInput" class="d-none" accept=".log,.txt,.access,.error">
+                                <button class="btn btn-primary btn-custom mt-3" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-folder-open"></i> Choose File
+                                </button>
+                            </div>
+                            
+                            <div class="mt-3 text-center">
+                                <button class="btn btn-outline-info btn-custom" onclick="loadSampleData()">
+                                    <i class="fas fa-file-code"></i> Use Sample Log File
+                                </button>
+                            </div>
+
+                            <div class="loading-spinner" id="loadingSpinner">
+                                <div class="spinner-border text-primary" role="status"></div>
+                                <p class="mt-2">Analyzing log file...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="feature-card">
+                                <h5><i class="fas fa-search text-primary"></i> What We Analyze</h5>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success"></i> IP Address Patterns</li>
+                                    <li><i class="fas fa-check text-success"></i> HTTP Status Codes</li>
+                                    <li><i class="fas fa-check text-success"></i> Attack Attempts</li>
+                                    <li><i class="fas fa-check text-success"></i> Suspicious Activity</li>
+                                    <li><i class="fas fa-check text-success"></i> Error Analysis</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <h5><i class="fas fa-file text-info"></i> Supported Formats</h5>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-dot-circle text-info"></i> Apache Access Logs</li>
+                                    <li><i class="fas fa-dot-circle text-info"></i> Nginx Access Logs</li>
+                                    <li><i class="fas fa-dot-circle text-info"></i> Generic Log Files</li>
+                                    <li><i class="fas fa-dot-circle text-info"></i> Error Logs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Tab -->
+                <div class="tab-pane fade" id="tools" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <h5><i class="fas fa-key text-warning"></i> Password Strength Checker</h5>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter password to check">
+                                </div>
+                                <button class="btn btn-warning btn-custom" onclick="checkPassword()">
+                                    <i class="fas fa-check-circle"></i> Check Strength
+                                </button>
+                                <div id="passwordResult" class="mt-3"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="feature-card">
+                                <h5><i class="fas fa-network-wired text-info"></i> Port Scanner</h5>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control mb-2" id="scanTarget" placeholder="Enter IP or domain">
+                                    <input type="text" class="form-control" id="scanPorts" placeholder="Ports (e.g., 80,443,22) or leave empty">
+                                </div>
+                                <button class="btn btn-info btn-custom" onclick="scanPorts()">
+                                    <i class="fas fa-search"></i> Scan Ports
+                                </button>
+                                <div id="scanResult" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Tab -->
+                <div class="tab-pane fade" id="results" role="tabpanel">
+                    <div id="analysisResults">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-chart-line fa-4x mb-3"></i>
+                            <h4>No Analysis Data Yet</h4>
+                            <p>Upload a log file to see detailed analysis results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
