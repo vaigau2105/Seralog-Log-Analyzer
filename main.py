@@ -15,7 +15,7 @@ from werkzeug.utils import secure_filename
 
 # Flask imports
 try:
-    from flask import Flask, render_template_string, request, jsonify, send_file, flash, redirect, url_for
+    from flask import Flask, render_template, render_template_string, request, jsonify, send_file, flash, redirect, url_for
     FLASK_AVAILABLE = True
 except ImportError:
     FLASK_AVAILABLE = False
@@ -306,7 +306,8 @@ class LogAnalyzerWeb:
 
         @self.app.route('/')
         def index():
-            return render_template_string(main_template)
+            # --- CHANGE THIS LINE ---
+            return render_template('index.html')
 
         @self.app.route('/upload', methods=['POST'])
         def upload_file():

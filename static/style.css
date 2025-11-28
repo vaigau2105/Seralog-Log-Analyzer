@@ -38,7 +38,7 @@
   left: 2px;
 }
 body { 
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+background: linear-gradient(135deg, #7b68ee 0%, #800080 100%);
 min-height: 100vh;
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -51,24 +51,36 @@ max-width: 1200px;
 backdrop-filter: blur(10px);
 }
 .header-section {
-background: linear-gradient(135deg, #2c3e50, #34495e);
+background: linear-gradient(135deg, #4b0082, #483d8b);
 color: white;
 border-radius: 20px 20px 0 0;
 padding: 30px;
 text-align: center;
 }
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.logo-text {
+    font-size: 3rem; /* You can adjust this size */
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
 .upload-zone {
-border: 3px dashed #007bff;
+border: 3px dashed #8a2be2;
 border-radius: 15px;
 padding: 50px;
 text-align: center;
 transition: all 0.3s ease;
 cursor: pointer;
-background: rgba(0,123,255,0.05);
+background: rgba(138,43,226,0.05);
 }
 .upload-zone:hover {
-border-color: #0056b3;
-background: rgba(0,123,255,0.1);
+border-color: #5a1e8a;
+background: rgba(138,43,226,0.1);
 transform: translateY(-2px);
 }
 .upload-zone.dragover {
@@ -121,7 +133,7 @@ padding: 20px;
 }
 .table-responsive {
 border-radius: 10px;
-overflow: hidden;
+overflow-x: auto;
 box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 .alert-custom {
